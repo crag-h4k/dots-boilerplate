@@ -1,0 +1,9 @@
+[submodule "dots/gud-vim"]
+	path = dots/gud-vim
+	url = https://github.com/crag-h4k/gud-vim
+[submodule "dots/gud-zsh"]
+	path = dots/gud-zsh
+	url = https://github.com/crag-h4k/gud-zsh
+[submodule "dots/gud-tmux"]
+	path = dots/gud-tmux
+	url = https://github.com/crag-h4k/gud-tmux
