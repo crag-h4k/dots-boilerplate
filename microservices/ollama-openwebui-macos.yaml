@@ -1,0 +1,23 @@
+---
+services:
+  webui:
+    image: ghcr.io/open-webui/open-webui:main
+    restart: unless-stopped
+    expose:
+      - 8080/tcp
+    ports:
+      - 8080:8080/tcp
+    environment:
+      # Use this if Ollama is running in a container as part
+      # of the same docker-compose file
+      # - OLLAMA_BASE_URL=http://ollama:11434
+      # Use this if Ollama is running on the host machine
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
+    extra_hosts:
+      - host.docker.internal:host-gateway
+    pull_policy: always
+    volumes:
+      - open-webui:/app/backend/data
+
+volumes:
+  open-webui: {}

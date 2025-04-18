@@ -3,23 +3,29 @@ version: "3.8"
 services:
   webui:
     image: ghcr.io/open-webui/open-webui:main
-    # restart: unless-stopped
+    restart: unless-stopped
     expose:
       - 8080/tcp
     ports:
       - 8080:8080/tcp
     environment:
-      - OLLAMA_BASE_URL=http://ollama:11434
-      # uncomment the following if you are running ollama on the docker host and remove the ollama service below
-      #- OLLAMA_BASE_URL=http://host.docker.internal:11434
+      # If Ollama is running on the docker host, uncomment the following and remove the ollama service below
+      #- OLLAMA_BASE_URL=http://ollama:11434
+      # If running ollama as part of this docker-compose.yaml, uncomment the following line
+      # And uncomment the "ollama" service below
+      # and remove the ollama service below
+      - OLLAMA_BASE_URL=http://host.docker.internal:11434
     volumes:
       - open-webui:/app/backend/data
+    # If running ollama as part of this docker-compose.yaml, uncomment the following two lines
     depends_on:
       - ollama
 
+  # Do Not use if Ollama is running on the docker host,
+  # ! make sure to remove the ollama service below !
   ollama:
     image: ollama/ollama
-    # restart: unless-stopped
+    restart: unless-stopped
     expose:
       - 11434/tcp
     ports:
@@ -31,5 +37,6 @@ services:
       - ollama:/root/.ollama
 
 volumes:
-  ollama:
-  open-webui:
+  # If running ollama as part of this docker-compose.yaml, uncomment the following line
+  ollama: {}
+  open-webui: {}
